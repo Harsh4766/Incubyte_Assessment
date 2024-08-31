@@ -55,6 +55,8 @@ export class Library {
         if (book.isAvailable) {
           throw new Error('Book is not borrowed.');
         }
+
+        book.isAvailable=true;
       }
     
     viewAvailableBooks(): Book[] {
