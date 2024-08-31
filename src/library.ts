@@ -30,6 +30,11 @@ interface Book {
       this.books.set(isbn, newBook);
     }
 
+    borrowBook(isbn: string): void {
+        const book = this.books.get(isbn);
+      }
+    
+
     viewAvailableBooks(): Book[] {
         return Array.from(this.books.values()).filter(book => book.isAvailable);
       }
