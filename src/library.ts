@@ -29,7 +29,7 @@ export class Library {
         };
         this.books.set(isbn, newBook);
     }
-
+    // Borrow books from library
     borrowBook(isbn: string): void {
         const book = this.books.get(isbn);
 
@@ -44,7 +44,7 @@ export class Library {
         book.isAvailable = false;
 
     }
-
+    // return books to library
     returnBook(isbn: string): void {
         const book = this.books.get(isbn);
     
@@ -58,7 +58,7 @@ export class Library {
 
         book.isAvailable=true;
       }
-    
+    // View available books
     viewAvailableBooks(): Book[] {
         return Array.from(this.books.values()).filter(book => book.isAvailable);
     }

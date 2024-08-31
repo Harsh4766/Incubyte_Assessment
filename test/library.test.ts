@@ -72,4 +72,33 @@ describe('Library Management System', () => {
       expect(() => library.returnBook('5678')).toThrow('Book not found.');
     });
   });
+  
+  // Test for view available books
+  describe('viewAvailableBooks', () => {
+    it('should show all available books', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      library.addBook('5678', 'Another Book', 'Author B', 2021);
+      expect(library.viewAvailableBooks()).toEqual([
+        {
+          isbn: '1234',
+          title: 'Test Book',
+          author: 'Author A',
+          publicationYear: 2020,
+          isAvailable: true,
+        },
+        {
+          isbn: '5678',
+          title: 'Another Book',
+          author: 'Author B',
+          publicationYear: 2021,
+          isAvailable: true,
+        },
+      ]);
+    });
+
+    it('should show an empty array if no books are available', () => {
+      expect(library.viewAvailableBooks()).toEqual([]);
+    });
+  });
+
   });
