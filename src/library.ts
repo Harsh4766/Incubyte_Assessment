@@ -37,8 +37,6 @@ interface Book {
             throw new Error('Book not found.');
           }
       }
-    
-
     viewAvailableBooks(): Book[] {
         return Array.from(this.books.values()).filter(book => book.isAvailable);
       }

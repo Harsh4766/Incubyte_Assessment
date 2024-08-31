@@ -33,5 +33,18 @@ describe('Library Management System', () => {
     it('should throw an error if the book does not exist', () => {
       expect(() => library.borrowBook('5000')).toThrow('Book not found.');
     });
+
+    it('should borrow an available book', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      library.borrowBook('1234');
+      expect(library.viewAvailableBooks()).toEqual([]);
+    });
+
+    it('should not allow borrowing a book that is not available', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      library.borrowBook('1234');
+      expect(() => library.borrowBook('1234')).toThrow('Book is currently not available.');
+    });
+
   });
   });
