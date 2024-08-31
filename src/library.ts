@@ -5,29 +5,29 @@ interface Book {
     author: string;
     publicationYear: number;
     isAvailable: boolean;
-  }
-  
-  export class Library {
+}
+
+export class Library {
     private books: Map<string, Book>;
-  
+
     constructor() {
-      this.books = new Map();
+        this.books = new Map();
     }
-  
+
     // Add a new book to the library
     addBook(isbn: string, title: string, author: string, publicationYear: number): void {
-      if (this.books.has(isbn)) {
-        throw new Error('Book with this ISBN already exists.');
-      }
-  
-      const newBook: Book = {
-        isbn,
-        title,
-        author,
-        publicationYear,
-        isAvailable: true,
-      };
-      this.books.set(isbn, newBook);
+        if (this.books.has(isbn)) {
+            throw new Error('Book with this ISBN already exists.');
+        }
+
+        const newBook: Book = {
+            isbn,
+            title,
+            author,
+            publicationYear,
+            isAvailable: true,
+        };
+        this.books.set(isbn, newBook);
     }
 
     borrowBook(isbn: string): void {
@@ -35,9 +35,16 @@ interface Book {
 
         if (!book) {
             throw new Error('Book not found.');
-          }
-      }
+        }
+
+        if (!book.isAvailable) {
+            throw new Error('Book is currently not available.');
+        }
+
+        book.isAvailable = false;
+
+    }
     viewAvailableBooks(): Book[] {
         return Array.from(this.books.values()).filter(book => book.isAvailable);
-      }
+    }
 }
