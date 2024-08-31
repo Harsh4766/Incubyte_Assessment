@@ -45,6 +45,31 @@ describe('Library Management System', () => {
       library.borrowBook('1234');
       expect(() => library.borrowBook('1234')).toThrow('Book is currently not available.');
     });
+  });
+  // Test for returning books
+  describe('returnBook', () => {
+    it('should return a borrowed book', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      library.borrowBook('1234');
+      library.returnBook('1234');
+      expect(library.viewAvailableBooks()).toEqual([
+        {
+          isbn: '1234',
+          title: 'Test Book',
+          author: 'Author A',
+          publicationYear: 2020,
+          isAvailable: true,
+        },
+      ]);
+    });
 
+    it('should not allow returning a book that is not borrowed', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      expect(() => library.returnBook('1234')).toThrow('Book is not borrowed.');
+    });
+
+    it('should throw an error if the book does not exist', () => {
+      expect(() => library.returnBook('5678')).toThrow('Book not found.');
+    });
   });
   });
