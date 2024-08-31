@@ -21,5 +21,11 @@ describe('Library Management System', () => {
         },
       ]);
     });
-});
+    it('should not allow adding a book with a duplicate ISBN', () => {
+      library.addBook('1234', 'Test Book', 'Author A', 2020);
+      expect(() => library.addBook('1234', 'Another Book', 'Author B', 2021)).toThrow(
+        'Book with this ISBN already exists.'
+      );
+    });
+  });
 });

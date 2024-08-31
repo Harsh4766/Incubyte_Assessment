@@ -26,7 +26,8 @@ interface Book {
         author,
         publicationYear,
         isAvailable: true,
-      };  
+      };
+      this.books.set(isbn, newBook);
     }
 
     viewAvailableBooks(): Book[] {
