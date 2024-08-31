@@ -32,6 +32,10 @@ interface Book {
 
     borrowBook(isbn: string): void {
         const book = this.books.get(isbn);
+
+        if (!book) {
+            throw new Error('Book not found.');
+          }
       }
     
 
